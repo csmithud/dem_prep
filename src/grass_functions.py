@@ -99,7 +99,7 @@ logger.setLevel(logging.INFO)
 logger.root.setLevel(logging.INFO)
 logging.basicConfig(format = '[%(asctime)s] [%(levelname)s] [%(module)s] : %(message)s')
 
-from src.data.utils import * 
+from src.utils import * 
 
 
 """esri compatible functions

@@ -33,8 +33,7 @@ import rasterio
 if os.getenv("AZ_BATCH_TASK_WORKING_DIR") is not None:
     sys.path.append(os.getenv("AZ_BATCH_TASK_WORKING_DIR"))
 
-from src.config import create_config
-import src.data.utils as utils
+import src.utils as utils
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)  
