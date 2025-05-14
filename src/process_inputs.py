@@ -6,6 +6,7 @@ if os.environ["APP_ENV"].lower() == "cloud":
     from azure.identity import DefaultAzureCredential
     import azure
 from osgeo import gdal
+from osgeo.gdal import gdalconst
 import geopandas as gpd
 import inspect
 import io 
@@ -29,6 +30,7 @@ from zipfile import ZipFile
 import fiona
 from matplotlib import pyplot as plt
 import rasterio
+# from gdal import gdalconst
 
 if os.getenv("AZ_BATCH_TASK_WORKING_DIR") is not None:
     sys.path.append(os.getenv("AZ_BATCH_TASK_WORKING_DIR"))
@@ -447,13 +449,14 @@ def reproject_raster(raster_path:list, out_vrt, sr:str, overwrite=False):
         return
     if sr in proj_four_dict.keys():
         kwargs = {'dstSRS':proj_four_dict[sr],
-            'errorThreshold':0.01} 
+            'errorThreshold':0} 
     else:
         kwargs = {'dstSRS':'EPSG:'+sr,
-            'errorThreshold':0.01}
+            'errorThreshold':0}
     gdal.Warp(
         str(out_vrt), 
         str(raster_path), 
+        resampleAlg = gdalconst.GRA_Bilinear,
         **kwargs
     )
 
