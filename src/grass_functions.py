@@ -448,7 +448,7 @@ def national_map_download_1_arc(dem_name:str,out_dir:pl.Path) -> str:
                 print('download attempt failed')
                 return 'attempt failed'
                   
-def nhd_download(select_data:str,vector_dir:pl.Path) -> str:
+def nhd_download(select_data:str,vector_dir:pl.Path,docker=True) -> str:
     '''
     creates link to nhd zip file on USGS The National Map. Checks link before attempting 
     to download. Prints updates and returns a list of the files downloaded.
@@ -469,7 +469,7 @@ def nhd_download(select_data:str,vector_dir:pl.Path) -> str:
     alive = url_is_alive(link,docker)
     if alive is True:
         os.mkdir(gdb_dir)
-        r = requests.get(link, allow_redirects=True,verify=False)
+        r = requests.get(link, allow_redirects=True,verify=docker)
         memfile = io.BytesIO(r.content)
         with ZipFile(memfile,'r') as openzip:
             print('saving to: '+str(gdb_dir))
@@ -761,7 +761,7 @@ def tnm_coverage(aoi, desired_resolution='1m',buffer = 2000, minimum_coverage = 
         tiles=4
     bounds = bound_box_str(aoi_coverage_buffer,tiles) #get bounding box  representation of geometry 
     DEM_products = {'1m':'Digital Elevation Model (DEM) 1 meter',
-                    '3m': 'National Elevation Dataset (NED) 1/9 arc-second','10m':'National Elevation Dataset (NED) 1/3 arc-second', '30m':'National Elevation Dataset (NED) 1 arc-second',
+                    '3m': 'National Elevation Dataset (NED) 1/9 arc-second','10m':'National Elevation Dataset (NED) 1/3 arc-second Current', '30m':'National Elevation Dataset (NED) 1 arc-second',
                    'opr': 'Original Product Resolution (OPR) Digital Elevation Model (DEM)'}
     covered = False
     assert desired_resolution in list(DEM_products.keys()), "Desired DEM resolution can only be 1m, 3m, 10m, 30m, or opr" 

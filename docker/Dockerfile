@@ -2,8 +2,8 @@
 FROM jupyter/scipy-notebook:2022-01-03
 #399cbb986c6b
 
-LABEL authors="Mark S. Bartlett"
-LABEL maintainer="bartlett <mark.bartlettjr@Stantec.com>"
+LABEL authors="Curtis Smith"
+LABEL maintainer="curtis.smith@Stantec.com"
 
 COPY docker/stantec-ca.crt /usr/local/share/ca-certificates/stantec-ca.crt
 COPY docker/stantec-ca.crt /etc/ssl/certs/stantec-ca.crt

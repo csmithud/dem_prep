@@ -1,11 +1,12 @@
 services:
   test:
-    image: grass-gis-processing:test
+    image: grass_dem_processing:latest
     build:
       args:
         - username=${USER}
         - uid=${UID}
         - gid=${GID}
+        - TAG=latest
       context: ../
       dockerfile: docker/Dockerfile
     deploy:

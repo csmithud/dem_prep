@@ -1,0 +1,2 @@
+aoi|legend/area|5|lf|blue|gray|0|area|1
+aoi|legend/area|5|lf|red|None|0|area|1
