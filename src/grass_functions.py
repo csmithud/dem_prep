@@ -813,14 +813,14 @@ def tnm_coverage(aoi, desired_resolution='1m',buffer = 2000, minimum_coverage = 
                 print('No high quality LiDAR coverage for this project area')
                 return [None,None]
 
-def project_raster(raster_name, raster_dir, sr):
-    """ Re-projects the raster_file in raster_dir to the provided sr and saves as VRT in raster_dir"""
-    gdal.Warp(
-        os.path.join(raster_dir, raster_name + "_sr" + sr + ".vrt"),
-        os.path.join(raster_dir, raster_name),
-        dstSRS='EPSG:'+sr, dstNodata=0
-    )
-    return os.path.join(raster_dir, raster_name + "_sr" + sr + ".vrt")
+# def project_raster(raster_name, raster_dir, sr):
+#     """ Re-projects the raster_file in raster_dir to the provided sr and saves as VRT in raster_dir"""
+#     gdal.Warp(
+#         os.path.join(raster_dir, raster_name + "_sr" + sr + ".vrt"),
+#         os.path.join(raster_dir, raster_name),
+#         dstSRS='EPSG:'+sr, dstNodata=0, errorThreshold = 0.01
+#     )
+#     return os.path.join(raster_dir, raster_name + "_sr" + sr + ".vrt")
 
 def dem_vert_unit_check(dem_source,raster_name,vert_unit):
     vert_value = {'feet':float(0.3048),'meter':float(1)}
